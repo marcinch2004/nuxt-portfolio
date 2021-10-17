@@ -3,7 +3,10 @@ module.exports = {
   mode: 'jit',
   theme: {
     extend: {
-      scale: {'102': '1.02',},
+      scale: {
+        '101': '1.01',
+        '102': '1.02',
+      },
       borderWidth: ['first'],
       transform: ['group-hover'],
       translate: ['group-hover'],

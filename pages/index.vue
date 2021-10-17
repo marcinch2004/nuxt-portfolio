@@ -37,14 +37,13 @@
   .lead {
     @apply text-2xl
   }
-
   .portfolio_item:hover h3 {
     transform: translateY(-0.3rem);
   }
   .portfolio_item:hover .portfolio_description {
     transform: translateY(-0.1rem);
   }
-    .portfolio_item:hover .portfolio_img {
+  .portfolio_item:hover .portfolio_img {
     transform: translateY(0.3rem);
   }
 
