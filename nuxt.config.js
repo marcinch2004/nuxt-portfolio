@@ -34,13 +34,13 @@ export default {
   modules: [
     '@nuxtjs/markdownit'
   ],
-  // markdownit: {
-  //   preset: 'default',
-  //   runtime: true, // Support `$md()`
-  //   linkify: true,
-  //   breaks: true,
-  //   injected: true,
-  // },
+  markdownit: {
+    preset: 'default',
+    runtime: true, // Support `$md()`
+    linkify: true,
+    breaks: true,
+    injected: true,
+  },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [

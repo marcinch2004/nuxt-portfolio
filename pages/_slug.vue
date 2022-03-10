@@ -133,7 +133,7 @@ export default {
 
 <style lang="postcss" scoped>
   .grid-gallery {
-    @apply m-auto max-w-2xl lg:max-w-7xl grid grid-cols-2  gap-x-4 gap-y-12 my-36
+    @apply m-auto max-w-2xl lg:max-w-7xl grid lg:grid-cols-2 gap-x-4 gap-y-12 my-36 sm:grid-cols-1
   }
   .gallery-item {
     @apply cursor-zoom-in
@@ -149,5 +149,11 @@ export default {
   }
   .fade-enter, .fade-leave-to {
     opacity: 0;
+  }
+   .modal img {
+    margin: 0 auto;
+  }
+  .lead {
+    @apply mb-10
   }
 </style>

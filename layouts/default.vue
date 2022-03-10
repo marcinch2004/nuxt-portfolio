@@ -7,6 +7,9 @@
 </template>
 
 <style lang="postcss">
+  body {
+    scroll-behavior: smooth;
+  }
   .body-no-scroll {
     @apply overflow-hidden
   }
