@@ -12,13 +12,13 @@
       <div v-bind:class="{'hidden': !showMenu, 'flex': showMenu}" class="sm:flex sm:flex-grow items-center">
         <ul class="flex flex-col sm:flex-row list-none ml-auto">
           <li class="nav-item">
-            <nuxt-link to="/blog" class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
+            <nuxt-link to="/blog" class="menu-item">
               <i class="fab fa-facebook-square text-lg leading-lg text-white opacity-75" /><span class="ml-2">Blog</span>
             </nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link to="/about" class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
-              <i class="fab fa-twitter text-lg leading-lg text-white opacity-75" /><span class="ml-2">About</span>
+            <nuxt-link to="/about" class="menu-item ">
+              <i class="fab fa-twitter text-lg leading-lg opacity-75" /><span class="ml-2">About</span>
             </nuxt-link>
           </li>
         </ul>
@@ -43,7 +43,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="postcss" scoped>
+.menu-item {
+  @apply px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75
+}
+
 svg {
   width: 1.3rem;
 }

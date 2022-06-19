@@ -1,14 +1,17 @@
 <template>
   <section class="container-fluid mx-auto py-16 sm:py-24">
-    <nuxt-link to="/">← back to mainpage</nuxt-link>
+    <nuxt-link to="/" class="link-back">
+      <ArrowLeft />
+    </nuxt-link>
 
     <!-- top post section -->
-    <div class="flex flex-wrap m-auto max-w-2xl lg:max-w-7xl mb-12">
-      <div class="flex flex-col w-3/6">
-        <h2 class="bg-gray-200 ">{{post.fields.title}}</h2>
-        <div class="bg-yellow-200">{{post.fields.description}}</div>
+    <!-- <div class="flex flex-wrap m-auto max-w-2xl lg:max-w-7xl mb-12"> -->
+    <div class="grid-gallery">
+      <div class="">
+        <h2 class="">{{post.fields.title}}</h2>
+        <div class="">{{post.fields.description}}</div>
       </div>
-      <div class="bg-blue-200 w-3/6">
+      <div class="">
         <p class="lead">{{post.fields.lead}}</p>
       </div>
     </div>
@@ -30,51 +33,78 @@
 
 <!-- Gallery 1 -->
     <div class="grid-gallery">
-      <h3 class="">Gallery 1</h3>
+      <h3 class="">{{post.fields.galleryOneTitle}}</h3>
       <p class="lead" v-html="post.fields.galleryOneText">{{post.fields.galleryOneText}}</p>
-        <div v-for="(image, index) in post.fields.galleryOne" :key="index">
-          <div class="gallery-item" :id="image.fields.title" v-on:click="toggleModal(image.fields.file)" :class="{active : showModal}">
-            <img :src="image.fields.file.url" alt="">
-            <!-- Modal -->
-            <transition name="fade">
-              <div class="modal" v-if="showModal & currentPic == image.fields.file.fileName" @close="showModal = false">
-                <h3 slot="header">Modal shows</h3>
-                <img :src="image.fields.file.url" alt="">
-              </div>
-            </transition>
-          </div>
-          <p class="image-caption" v-if="image.fields.description">{{image.fields.description}}</p>
+      <div class="gallery-item" v-for="(image, index) in post.fields.galleryOne" :key="index">
+        <div class="" :id="image.fields.title" v-on:click="toggleModal(image.fields.file)" :class="{active : showModal}">
+          <img :src="image.fields.file.url" alt="">
+          <!-- Modal -->
+          <transition name="fade">
+            <div class="modal" v-if="showModal & currentPic == image.fields.file.fileName" @close="showModal = false">
+              <h3 slot="header">Modal shows</h3>
+              <img :src="image.fields.file.url" alt="">
+            </div>
+          </transition>
         </div>
+        <p class="image-caption" v-if="image.fields.description">{{image.fields.description}}</p>
+      </div>
     </div>
 
     <!-- Gallery 2 -->
     <div class="grid-gallery">
-      <h3 class="">Gallery 2</h3>
+      <h3 class="">{{post.fields.galleryTwoTitle}}</h3>
       <p class="lead" v-html="post.fields.galleryTwoText">{{post.fields.galleryTwoText}}</p>
-        <div v-for="(image, index) in post.fields.galleryTwo" :key="index">
-          <div class="gallery-item" :id="image.fields.title" v-on:click="toggleModal(image.fields.file)" :class="{active : showModal}">
+      
+      <template v-for="(image, index) in post.fields.galleryTwo">
+        <!-- I used template here to be able to add dynamically class fullWidth ot images that are on 100% of the grid -->
+        <!-- <p :key="index" v-if="image.metadata.tags[0]">{{image.metadata.tags[0].sys.id}} image</p> -->
+        <!-- 
+          ### CLASS FOR FULL WIDTH IMAGE ###
+          Check if the img has tag and add class with this tag.
+          This enables displaying the images with fullwidth Class
+          v-if="image.metadata.tags[0]" adds class to the div fullwidth: image.metadata.tags[0].sys.id}
+          -->
+        <div :key="index" v-if="image.metadata.tags[0]" class="gallery-item" :id="image.fields.title" v-on:click="toggleModal(image.fields.file)" :class="{active : showModal, fullwidth: image.metadata.tags[0].sys.id}">
             <img :src="image.fields.file.url" alt="">
-            <!-- Modal -->
+            <p :key="index" class="image-caption" v-if="image.fields.description">{{image.fields.description}}</p>
+            <!-- Modal shows-->
             <transition name="fade">
               <div class="modal" v-if="showModal & currentPic == image.fields.file.fileName" @close="showModal = false">
                 <h3 slot="header">Modal shows</h3>
                 <img :src="image.fields.file.url" alt="">
               </div>
             </transition>
-          </div>
-          <p class="image-caption" v-if="image.fields.description">{{image.fields.description}}</p>
         </div>
+        <!-- v-else to show img without the tag -->
+        <div :key="index" v-else class="gallery-item" :id="image.fields.title" v-on:click="toggleModal(image.fields.file)" :class="{active : showModal}">
+          <img :src="image.fields.file.url" alt="">
+          <p :key="index" class="image-caption" v-if="image.fields.description">{{image.fields.description}}</p>
+          <!-- Modal shows -->
+          <transition name="fade">
+            <div class="modal" v-if="showModal & currentPic == image.fields.file.fileName" @close="showModal = false">
+              <h3 slot="header">Modal shows</h3>
+              <img :src="image.fields.file.url" alt="">
+            </div>
+          </transition>
+        </div>
+
+      </template>
+      
     </div>
 
     <!-- next / previosus section -->
     <hr>
-    <nuxt-link v-if="currentPostIndex() > 0" :to="allPortfolios[currentPostIndex() - 1].fields.slug">
-      previous post: {{allPortfolios[currentPostIndex() - 1].fields.slug}}
-    </nuxt-link>
-    <br>
-    <nuxt-link v-if="currentPostIndex() < this.$store.state.portfolios.length-1" :to="allPortfolios[currentPostIndex() + 1].fields.slug">
-      next post:{{allPortfolios[currentPostIndex() + 1].fields.slug}}
-    </nuxt-link>
+    <div class="nav-bottom">
+      <nuxt-link class="group nav-bottom-link nav-bottom-previous" v-if="currentPostIndex() > 0" :to="allPortfolios[currentPostIndex() - 1].fields.slug">
+       <ArrowLeft />
+        {{allPortfolios[currentPostIndex() - 1].fields.title}}
+      </nuxt-link>
+      <br>
+      <nuxt-link class="group nav-bottom-link nav-bottom-next" v-if="currentPostIndex() < this.$store.state.portfolios.length-1" :to="allPortfolios[currentPostIndex() + 1].fields.slug">
+        <ArrowRight />
+        {{allPortfolios[currentPostIndex() + 1].fields.title}}
+      </nuxt-link>
+    </div>
 
   </section>
 </template>
@@ -133,13 +163,18 @@ export default {
 
 <style lang="postcss" scoped>
   .grid-gallery {
-    @apply m-auto max-w-2xl lg:max-w-7xl grid lg:grid-cols-2 gap-x-4 gap-y-12 my-36 sm:grid-cols-1
+    @apply m-auto max-w-2xl px-6  lg:max-w-7xl lg:grid lg:grid-cols-2 gap-x-8 gap-y-12 my-36 md:block
+    /* @apply m-auto max-w-2xl lg:max-w-7xl flex lg:grid-cols-2 gap-x-8 gap-y-12 my-36 md:grid-cols-1 sm:grid-cols-1 */
   }
+
   .gallery-item {
-    @apply cursor-zoom-in
+    @apply cursor-zoom-in lg:mb-0 mb-12
   }
   .image-caption {
     @apply text-gray-500 text-sm mt-3
+  }
+  .fullwidth {
+    @apply col-span-2
   }
   .modal {
     @apply block w-screen fixed bg-white overflow-auto top-0 bottom-0 left-0 right-0 cursor-zoom-out
@@ -156,4 +191,18 @@ export default {
   .lead {
     @apply mb-10
   }
+  .link-back {
+    @apply px-6
+  }
+  .nav-bottom {
+    @apply flex justify-between px-6
+  }
+  .nav-bottom-icon {
+    @apply self-center
+  }
+  /* .icon:hover line,
+  .icon:hover path {
+      stroke: red;
+      stroke-width: 2px;
+  } */
 </style>

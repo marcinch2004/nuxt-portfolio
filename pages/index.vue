@@ -28,6 +28,11 @@
 
 // all styles go here
 <style lang="postcss">
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap');
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
   h2 {
     @apply text-5xl font-bold py-6
   }

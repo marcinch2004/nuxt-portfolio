@@ -6,6 +6,11 @@
 # install dependencies
 $ yarn install
 
+#add .env file in the root
+CONTENTFUL_ACCESSTOKEN=your_token_here
+CONTENTFUL_ENVIRONMENT=master
+CONTENTFUL_SPACE=your_space_here
+
 # serve with hot reload at localhost:3000
 $ yarn dev
 
