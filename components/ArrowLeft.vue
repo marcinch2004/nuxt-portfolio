@@ -14,7 +14,7 @@ export default {
 
 <style lang="postcss" scoped>
   .nav-bottom-icon-container {
-    @apply flex flex-col justify-center w-12 h-12 border rounded-full transition-colors hover:border-blue-500
+    @apply flex flex-col justify-center w-12 h-12 border rounded-full transition-colors mr-3 hover:border-blue-500
   }
   .nav-bottom-icon-container:hover .svg-stroke {
     stroke: #4F46E5;

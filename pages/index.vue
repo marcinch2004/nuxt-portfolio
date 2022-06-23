@@ -5,8 +5,8 @@
           <div class="portfolio_item group transform transition-all ease-out duration-500" v-for="(portfolio, index) in this.$store.state.portfolios" :key="index">
             <nuxt-link class="group block" :to="`/${ portfolio.fields.slug }`">
               <h3 class="transition-all ease-out duration-500">{{ portfolio.fields.title }}</h3>
-              <p class="portfolio_description text-gray-600 transition-all ease-out duration-500 text-sm">{{portfolio.fields.description}}</p>
-              <img class="portfolio_img transition-all ease-out duration-500" :src="portfolio.fields.heroImage.fields.file.url" alt="">
+              <p class="portfolio_description text-gray-600 transition-all ease-out duration-500 text-sm text-mono">{{portfolio.fields.description}}</p>
+              <img class="portfolio_img transition-all ease-out duration-500 pt-2" :src="portfolio.fields.heroImage.fields.file.url" alt="">
             </nuxt-link>
           </div>
       </div>
@@ -28,11 +28,15 @@
 
 // all styles go here
 <style lang="postcss">
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap');
 
   body {
     font-family: 'IBM Plex Sans', sans-serif;
   }
+  .text-mono {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
   h2 {
     @apply text-5xl font-bold py-6
   }

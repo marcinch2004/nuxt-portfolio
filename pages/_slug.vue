@@ -9,11 +9,9 @@
     <div class="grid-gallery">
       <div class="">
         <h2 class="">{{post.fields.title}}</h2>
-        <div class="">{{post.fields.description}}</div>
+        <span class="bg-yellow-200 uppercase text-sm px-2 text-mono">{{post.fields.description}}</span>
       </div>
-      <div class="">
-        <p class="lead">{{post.fields.lead}}</p>
-      </div>
+      <p class="lead">{{post.fields.lead}}</p>
     </div>
 
     <!-- Hero image here -->
@@ -34,8 +32,8 @@
 <!-- Gallery 1 -->
     <div class="grid-gallery">
       <h3 class="">{{post.fields.galleryOneTitle}}</h3>
-      <p class="lead" v-html="post.fields.galleryOneText">{{post.fields.galleryOneText}}</p>
-      <div class="gallery-item" v-for="(image, index) in post.fields.galleryOne" :key="index">
+      <p class="gallery-lead" v-html="post.fields.galleryOneText">{{post.fields.galleryOneText}}</p>
+      <div class="gallery-item group" v-for="(image, index) in post.fields.galleryOne" :key="index">
         <div class="" :id="image.fields.title" v-on:click="toggleModal(image.fields.file)" :class="{active : showModal}">
           <img :src="image.fields.file.url" alt="">
           <!-- Modal -->
@@ -46,7 +44,7 @@
             </div>
           </transition>
         </div>
-        <p class="image-caption" v-if="image.fields.description">{{image.fields.description}}</p>
+        <p class="image-caption text-mono" v-if="image.fields.description">{{image.fields.description}}</p>
       </div>
     </div>
 
@@ -64,7 +62,7 @@
           This enables displaying the images with fullwidth Class
           v-if="image.metadata.tags[0]" adds class to the div fullwidth: image.metadata.tags[0].sys.id}
           -->
-        <div :key="index" v-if="image.metadata.tags[0]" class="gallery-item" :id="image.fields.title" v-on:click="toggleModal(image.fields.file)" :class="{active : showModal, fullwidth: image.metadata.tags[0].sys.id}">
+        <div :key="index" v-if="image.metadata.tags[0]" class="gallery-item group" :id="image.fields.title" v-on:click="toggleModal(image.fields.file)" :class="{active : showModal, fullwidth: image.metadata.tags[0].sys.id}">
             <img :src="image.fields.file.url" alt="">
             <p :key="index" class="image-caption" v-if="image.fields.description">{{image.fields.description}}</p>
             <!-- Modal shows-->
@@ -76,9 +74,9 @@
             </transition>
         </div>
         <!-- v-else to show img without the tag -->
-        <div :key="index" v-else class="gallery-item" :id="image.fields.title" v-on:click="toggleModal(image.fields.file)" :class="{active : showModal}">
+        <div :key="index" v-else class="gallery-item group" :id="image.fields.title" v-on:click="toggleModal(image.fields.file)" :class="{active : showModal}">
           <img :src="image.fields.file.url" alt="">
-          <p :key="index" class="image-caption" v-if="image.fields.description">{{image.fields.description}}</p>
+          <p :key="index" class="image-caption text-mono" v-if="image.fields.description">{{image.fields.description}}</p>
           <!-- Modal shows -->
           <transition name="fade">
             <div class="modal" v-if="showModal & currentPic == image.fields.file.fileName" @close="showModal = false">
@@ -93,17 +91,21 @@
     </div>
 
     <!-- next / previosus section -->
-    <hr>
     <div class="nav-bottom">
-      <nuxt-link class="group nav-bottom-link nav-bottom-previous" v-if="currentPostIndex() > 0" :to="allPortfolios[currentPostIndex() - 1].fields.slug">
-       <ArrowLeft />
-        {{allPortfolios[currentPostIndex() - 1].fields.title}}
-      </nuxt-link>
-      <br>
-      <nuxt-link class="group nav-bottom-link nav-bottom-next" v-if="currentPostIndex() < this.$store.state.portfolios.length-1" :to="allPortfolios[currentPostIndex() + 1].fields.slug">
-        <ArrowRight />
-        {{allPortfolios[currentPostIndex() + 1].fields.title}}
-      </nuxt-link>
+      <div>
+        <nuxt-link class="nav-bottom-link text-mono" v-if="currentPostIndex() > 0" :to="allPortfolios[currentPostIndex() - 1].fields.slug">
+        <ArrowLeft />
+        <span class="self-center">
+          {{allPortfolios[currentPostIndex() - 1].fields.title}}
+        </span>
+        </nuxt-link>
+      </div>
+      <div>
+        <nuxt-link class="nav-bottom-link text-mono" v-if="currentPostIndex() < this.$store.state.portfolios.length-1" :to="allPortfolios[currentPostIndex() + 1].fields.slug">
+          <span class="self-center">{{allPortfolios[currentPostIndex() + 1].fields.title}}</span>
+          <ArrowRight />
+        </nuxt-link>
+      </div>
     </div>
 
   </section>
@@ -164,14 +166,17 @@ export default {
 <style lang="postcss" scoped>
   .grid-gallery {
     @apply m-auto max-w-2xl px-6  lg:max-w-7xl lg:grid lg:grid-cols-2 gap-x-8 gap-y-12 my-36 md:block
-    /* @apply m-auto max-w-2xl lg:max-w-7xl flex lg:grid-cols-2 gap-x-8 gap-y-12 my-36 md:grid-cols-1 sm:grid-cols-1 */
+  }
+  .gallery-lead {
+    @apply text-lg lg:mb-0 mb-8
   }
 
   .gallery-item {
     @apply cursor-zoom-in lg:mb-0 mb-12
   }
+
   .image-caption {
-    @apply text-gray-500 text-sm mt-3
+    @apply text-gray-500 text-xs mt-3 group-hover:text-blue-500 transition-colors duration-200
   }
   .fullwidth {
     @apply col-span-2
@@ -189,13 +194,16 @@ export default {
     margin: 0 auto;
   }
   .lead {
-    @apply mb-10
+    @apply self-center mt-6
   }
   .link-back {
-    @apply px-6
+    @apply m-auto max-w-2xl lg:max-w-7xl px-6 block
   }
   .nav-bottom {
     @apply flex justify-between px-6
+  }
+  .nav-bottom-link {
+    @apply flex flex-row align-middle text-xs
   }
   .nav-bottom-icon {
     @apply self-center
