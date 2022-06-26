@@ -1,15 +1,15 @@
 <template>
-  <section class="container-fluid mx-auto py-16 sm:py-24">
+  <section class="container-fluid mx-auto py-12 sm:py-12">
     <nuxt-link to="/" class="link-back">
       <ArrowLeft />
     </nuxt-link>
 
     <!-- top post section -->
     <!-- <div class="flex flex-wrap m-auto max-w-2xl lg:max-w-7xl mb-12"> -->
-    <div class="grid-gallery">
+    <div class="grid-gallery first-gallery">
       <div class="">
         <h2 class="">{{post.fields.title}}</h2>
-        <span class="bg-yellow-200 uppercase text-sm px-2 text-mono">{{post.fields.description}}</span>
+        <span class="uppercase text-sm px-2 text-mono">{{post.fields.description}}</span>
       </div>
       <p class="lead">{{post.fields.lead}}</p>
     </div>
@@ -51,7 +51,7 @@
     <!-- Gallery 2 -->
     <div class="grid-gallery">
       <h3 class="">{{post.fields.galleryTwoTitle}}</h3>
-      <p class="lead" v-html="post.fields.galleryTwoText">{{post.fields.galleryTwoText}}</p>
+      <p class="gallery-lead lead" v-html="post.fields.galleryTwoText">{{post.fields.galleryTwoText}}</p>
       
       <template v-for="(image, index) in post.fields.galleryTwo">
         <!-- I used template here to be able to add dynamically class fullWidth ot images that are on 100% of the grid -->
@@ -93,7 +93,7 @@
     <!-- next / previosus section -->
     <div class="nav-bottom">
       <div>
-        <nuxt-link class="nav-bottom-link text-mono" v-if="currentPostIndex() > 0" :to="allPortfolios[currentPostIndex() - 1].fields.slug">
+        <nuxt-link class="group nav-bottom-link text-mono" v-if="currentPostIndex() > 0" :to="allPortfolios[currentPostIndex() - 1].fields.slug">
         <ArrowLeft />
         <span class="self-center">
           {{allPortfolios[currentPostIndex() - 1].fields.title}}
@@ -101,7 +101,7 @@
         </nuxt-link>
       </div>
       <div>
-        <nuxt-link class="nav-bottom-link text-mono" v-if="currentPostIndex() < this.$store.state.portfolios.length-1" :to="allPortfolios[currentPostIndex() + 1].fields.slug">
+        <nuxt-link class="group nav-bottom-link text-mono" v-if="currentPostIndex() < this.$store.state.portfolios.length-1" :to="allPortfolios[currentPostIndex() + 1].fields.slug">
           <span class="self-center">{{allPortfolios[currentPostIndex() + 1].fields.title}}</span>
           <ArrowRight />
         </nuxt-link>
@@ -167,14 +167,15 @@ export default {
   .grid-gallery {
     @apply m-auto max-w-2xl px-6  lg:max-w-7xl lg:grid lg:grid-cols-2 gap-x-8 gap-y-12 my-36 md:block
   }
+  .first-gallery {
+    @apply mt-24 mb-12
+  }
   .gallery-lead {
     @apply text-lg lg:mb-0 mb-8
   }
-
   .gallery-item {
     @apply cursor-zoom-in lg:mb-0 mb-12
   }
-
   .image-caption {
     @apply text-gray-500 text-xs mt-3 group-hover:text-blue-500 transition-colors duration-200
   }
@@ -200,7 +201,7 @@ export default {
     @apply m-auto max-w-2xl lg:max-w-7xl px-6 block
   }
   .nav-bottom {
-    @apply flex justify-between px-6
+    @apply flex justify-between m-auto max-w-2xl px-6 lg:max-w-7xl 
   }
   .nav-bottom-link {
     @apply flex flex-row align-middle text-xs

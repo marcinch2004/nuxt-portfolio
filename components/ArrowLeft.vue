@@ -1,8 +1,8 @@
 <template>
-    <span class="nav-bottom-icon-container">
-        <svg aria-hidden="true" focusable="false" class="self-center icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <line class="svg-stroke" x1="2" y1="8" x2="15" y2="8" stroke="black" stroke-linecap="round"/>
-        <path class="svg-stroke" d="M8 1L1 8L8 15" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+    <span class="group group-hover:border-blue-500 nav-bottom-icon-container">
+        <svg aria-hidden="true" focusable="false" class="group-hover:text-blue-500 transition-colors duration-300 self-center icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <line stroke="currentColor" class="svg-stroke" x1="2" y1="8" x2="15" y2="8" stroke-linecap="round"/>
+        <path stroke="currentColor" class="svg-stroke" d="M8 1L1 8L8 15" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     </span>
 </template>
