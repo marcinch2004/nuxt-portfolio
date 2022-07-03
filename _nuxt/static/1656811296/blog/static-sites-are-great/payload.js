@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/blog/static-sites-are-great", {data:[{}],fetch:{},mutations:[]});

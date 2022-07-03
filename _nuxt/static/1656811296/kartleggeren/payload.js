@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/kartleggeren", {data:[{}],fetch:{},mutations:[]});

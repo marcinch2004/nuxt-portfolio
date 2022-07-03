@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/blog/multiple%20libraries", {data:[{}],fetch:{},mutations:[]});
