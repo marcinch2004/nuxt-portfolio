@@ -65,7 +65,7 @@
 
   body {
     font-family: 'IBM Plex Sans', sans-serif;
-    @apply min-h-screen
+    @apply min-h-screen font-sans
   }
   .text-mono {
     font-family: 'IBM Plex Sans', monospace;

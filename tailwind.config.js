@@ -3,6 +3,9 @@ module.exports = {
   mode: 'jit',
   theme: {
     extend: {
+      fontFamily: {
+        'sans': ['IBM Plex Sans', 'sans'],
+      },
       scale: {
         '101': '1.01',
         '102': '1.02',

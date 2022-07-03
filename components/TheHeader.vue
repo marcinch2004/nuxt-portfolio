@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif&family=IBM+Plex+Sans:wght@400;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif&family=IBM+Plex+Sans:wght@400;700&display=swap'); */
 
 .header {
   font-family: 'IBM Plex Sans', sans-serif;

@@ -22,9 +22,7 @@ export default {
     ],
     link: [
       { 
-        rel: 'icon', type: 'image/x-icon', href: '/favicon.ico',
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap'
+        rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'
       }
     ]
   },
@@ -32,6 +30,14 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
+
+  googleFonts: {
+    prefetch: true,
+    display: 'swap',
+    families: {
+      'IBM+Plex+Sans': [400, 600]
+    }
+  },
 
   quite:true,
 
@@ -67,7 +73,10 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxtjs/tailwindcss'],
+  buildModules: [
+    '@nuxtjs/google-fonts',
+    '@nuxtjs/tailwindcss'
+  ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxtjs/markdownit"],
