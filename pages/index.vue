@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="flex-grow">
     <section class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl">
 
 
@@ -65,6 +65,7 @@
 
   body {
     font-family: 'IBM Plex Sans', sans-serif;
+    @apply min-h-screen
   }
   .text-mono {
     font-family: 'IBM Plex Sans', monospace;
@@ -92,7 +93,7 @@
     @apply bg-blue-800 text-white
   }
   .filter {
-    @apply mr-2 px-4 py-2 border rounded-full text-xs
+    @apply mr-2 px-4 py-2 border rounded-full text-xs transition-colors duration-200 hover:border-blue-500
   }
   .portfolio_item {
     @apply contents;

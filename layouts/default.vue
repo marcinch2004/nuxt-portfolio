@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class=main-container>
     <TheHeader />
     <Nuxt />
     <TheFooter />
@@ -12,5 +12,8 @@
   }
   .body-no-scroll {
     @apply overflow-hidden
+  }
+  .main-container {
+    @apply flex flex-col min-h-screen 
   }
 </style>

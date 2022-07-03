@@ -1,8 +1,10 @@
 <template>
-  <section class="container-fluid mx-auto py-12 sm:py-12">
+  <section ref="testBlock" class="container-fluid mx-auto py-12 sm:py-12">
     <nuxt-link to="/" class="link-back">
       <ArrowLeft />
     </nuxt-link>
+
+
 
     <!-- top post section -->
     <!-- <div class="flex flex-wrap m-auto max-w-2xl lg:max-w-7xl mb-12"> -->
@@ -33,10 +35,45 @@
     <div class="grid-gallery">
       <h3 class="">{{post.fields.galleryOneTitle}}</h3>
       <p class="gallery-lead" v-html="post.fields.galleryOneText">{{post.fields.galleryOneText}}</p>
-      <div class="gallery-item group" v-for="(image, index) in post.fields.galleryOne" :key="index">
+
+      <template v-for="(image, index) in post.fields.galleryOne">
+        <!-- I used template here to be able to add dynamically class fullWidth ot images that are on 100% of the grid -->
+        <!-- <p :key="index" v-if="image.metadata.tags[0]">{{image.metadata.tags[0].sys.id}} image</p> -->
+        <!-- 
+          ### CLASS FOR FULL WIDTH IMAGE ###
+          Check if the img has tag and add class with this tag.
+          This enables displaying the images with fullwidth Class
+          v-if="image.metadata.tags[0]" adds class to the div fullwidth: image.metadata.tags[0].sys.id}
+          -->
+        <div :key="index" v-if="image.metadata.tags[0]" class="gallery-item group" :id="image.fields.title" v-on:click="toggleModal(image.fields.file)" :class="{active : showModal, fullwidth: image.metadata.tags[0].sys.id}">
+            <img :src="image.fields.file.url" alt="">
+            <p :key="index" class="image-caption" v-if="image.fields.description">{{image.fields.description}}</p>
+            <!-- Modal shows-->
+            <transition name="fade">
+              <div class="modal" v-if="showModal & currentPic == image.fields.file.fileName" @close="showModal = false">
+                <h3 slot="header">Modal shows</h3>
+                <img :src="image.fields.file.url" alt="">
+              </div>
+            </transition>
+        </div>
+        <!-- v-else to show img without the tag -->
+        <div :key="index" v-else class="gallery-item group" :id="image.fields.title" v-on:click="toggleModal(image.fields.file)" :class="{active : showModal}">
+          <img :src="image.fields.file.url" alt="">
+          <p :key="index" class="image-caption text-mono" v-if="image.fields.description">{{image.fields.description}}</p>
+          <!-- Modal shows -->
+          <transition name="fade">
+            <div class="modal" v-if="showModal & currentPic == image.fields.file.fileName" @close="showModal = false">
+              <h3 slot="header">Modal shows</h3>
+              <img :src="image.fields.file.url" alt="">
+            </div>
+          </transition>
+        </div>
+      </template>
+
+      <!-- OLD GALLERY remove when everything is fine -->
+      <!-- <div class="gallery-item group" v-for="(image, index) in post.fields.galleryOne" :key="index">
         <div class="" :id="image.fields.title" v-on:click="toggleModal(image.fields.file)" :class="{active : showModal}">
           <img :src="image.fields.file.url" alt="">
-          <!-- Modal -->
           <transition name="fade">
             <div class="modal" v-if="showModal & currentPic == image.fields.file.fileName" @close="showModal = false">
               <h3 slot="header">Modal shows</h3>
@@ -45,7 +82,7 @@
           </transition>
         </div>
         <p class="image-caption text-mono" v-if="image.fields.description">{{image.fields.description}}</p>
-      </div>
+      </div> -->
     </div>
 
     <!-- Gallery 2 -->
@@ -85,9 +122,7 @@
             </div>
           </transition>
         </div>
-
       </template>
-      
     </div>
 
     <!-- next / previosus section -->
@@ -100,6 +135,7 @@
         </span>
         </nuxt-link>
       </div>
+        <button class="mr-2 px-4 py-2 border rounded-full text-xs self-center group nav-bottom-link text-mono transition-colors hover:border-blue-500" @click="scrollToTop()">Back to top</button>
       <div>
         <nuxt-link class="group nav-bottom-link text-mono" v-if="currentPostIndex() < this.$store.state.portfolios.length-1" :to="allPortfolios[currentPostIndex() + 1].fields.slug">
           <span class="self-center">{{allPortfolios[currentPostIndex() + 1].fields.title}}</span>
@@ -107,7 +143,6 @@
         </nuxt-link>
       </div>
     </div>
-
   </section>
 </template>
 
@@ -158,6 +193,9 @@ export default {
       return {
         title: this.post.fields.title
       };
+    },
+    scrollToTop() {
+      window.scrollTo({top:0,left:0, behavior: 'smooth'});
     }
   }
 }
@@ -183,7 +221,7 @@ export default {
     @apply col-span-2
   }
   .modal {
-    @apply block w-screen fixed bg-white overflow-auto top-0 bottom-0 left-0 right-0 cursor-zoom-out
+    @apply block w-screen fixed bg-white overflow-auto top-0 bottom-0 left-0 right-0 cursor-zoom-out z-10
   }
   .fade-enter-active, .fade-leave-active {
     transition: opacity 0.5s ease-out;
@@ -209,9 +247,4 @@ export default {
   .nav-bottom-icon {
     @apply self-center
   }
-  /* .icon:hover line,
-  .icon:hover path {
-      stroke: red;
-      stroke-width: 2px;
-  } */
 </style>
