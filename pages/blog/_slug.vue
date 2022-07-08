@@ -1,8 +1,8 @@
 <template>
-  <section class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-    <div class="cos">
+  <section class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 ">
+    <div class="max-w-prose">
       <!-- <p>{{allPosts}}</p> -->
-      <nuxt-link to="/">back to mainpage</nuxt-link>
+      <nuxt-link class="mr-2 px-4 py-2 border rounded-full text-xs self-center group nav-bottom-link text-mono transition-colors hover:border-blue-500" to="/blog">back to blog</nuxt-link>
 
       <h2>{{post.fields.title}}</h2>
       <div v-html="markdownToHtml"></div>
@@ -66,3 +66,12 @@ export default {
     }
 }
 </script>
+
+<style lang="postcss">
+  h3 {
+    @apply mb-4 mt-8
+  }
+  img {
+    @apply my-12
+  }
+</style>
