@@ -11,7 +11,7 @@
         </button>
       </div>
       <div v-bind:class="{'hidden': !showMenu, 'flex': showMenu}" class="sm:flex sm:flex-grow items-center">
-        <ul class="flex flex-col sm:flex-row list-none ml-auto">
+        <ul class="flex flex-col sm:flex-row list-none ml-auto my-0">
           <li class="nav-item">
             <nuxt-link to="/blog" class="menu-item">
               <span class="ml-2">Blog</span>
