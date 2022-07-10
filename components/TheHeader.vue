@@ -1,5 +1,5 @@
 <template>
-  <nav class="header relative flex flex-wrap items-center justify-between px-2 py-3 border mb-3">
+  <nav class="header relative flex flex-wrap items-center justify-between px-2 py-3 border-b mb-3">
     <div class="m-auto max-w-2xl lg:max-w-7xl px-6 container mx-auto flex flex-wrap items-center justify-between">
       <div class="group w-full relative flex justify-between sm:w-auto  lg:static lg:block lg:justify-start">
         <nuxt-link to="/" class="group flex text-sm leading-relaxed mr-4 py-2 whitespace-nowrap uppercase">
@@ -52,7 +52,7 @@ export default {
 }
 
 .menu-item {
-  @apply px-3 py-2 flex items-center text-xs uppercase  leading-snug hover:text-blue-500 transition-colors duration-200
+  @apply px-3 py-2 flex items-center text-xs uppercase leading-snug hover:text-blue-500 transition-colors duration-200
 }
 
 svg {

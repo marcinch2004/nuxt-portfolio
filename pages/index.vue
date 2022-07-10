@@ -1,21 +1,18 @@
 <template>
   <main class="flex-grow">
     <section class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl">
-
-
-        <div class="flex">
-          <button class="filter" v-bind:class="{ active: currentFilter === 'All' }" v-on:click="setFilter('All')">ALL PROJECTS
+      <!-- tag section -->
+      <div class="flex">
+        <button class="filter" v-bind:class="{ active: currentFilter === 'All' }" v-on:click="setFilter('All')">ALL PROJECTS
+        </button>
+        <button 
+          v-for="(tag, index) in myTags" :key="index" v-on:click="setFilter(tag)"
+          :class="{ active: currentFilter === tag }"
+          class="filter">{{tag.split(/(?=[A-Z])/).join(" ").toUpperCase()}}
           </button>
-          <button 
-            v-for="(tag, index) in myTags" :key="index" v-on:click="setFilter(tag)"
-            :class="{ active: currentFilter === tag }"
-            class="filter">{{tag.split(/(?=[A-Z])/).join(" ").toUpperCase()}}
-           </button>
-        </div>
-
+      </div>
 
       <div class="mt-6 grid grid-cols-1 gap-y-12 gap-x-10 sm:grid-cols-1 lg:grid-cols-2 xl:gap-x-12">
-
           <div class="portfolio_item group transform transition-all ease-out duration-500" v-for="(portfolio, index) in this.$store.state.portfolios" :key="index">
             <nuxt-link 
             v-if="currentFilter === portfolio.metadata.tags[0].sys.id || currentFilter === 'All'"

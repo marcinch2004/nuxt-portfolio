@@ -6,7 +6,7 @@
       <nuxt-link class="self-start mr-12 px-4 py-2 mb-8 border rounded-full text-xs group nav-bottom-link text-mono transition-colors hover:border-blue-500" to="/blog">Back to blog</nuxt-link>
 
       <div class="max-w-prose">
-        <h2>{{post.fields.title}}</h2>
+        <h2 class="">{{post.fields.title}}</h2>
         <div v-html="markdownToHtml"></div>
       </div>
 
