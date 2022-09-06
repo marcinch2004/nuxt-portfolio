@@ -18,7 +18,7 @@
 
     <!-- Hero image here -->
     <div class="bg-gray-400">
-        <img class="w-full" :src="post.fields.heroImage.fields.file.url" alt="">
+        <img class="w-full pt-0" :src="post.fields.heroImage.fields.file.url" alt="">
     </div>
 
     <!-- Gallery 1 static -->
@@ -33,7 +33,7 @@
 
 <!-- Gallery 1 -->
     <div class="grid-gallery">
-      <h3 class="">{{post.fields.galleryOneTitle}}</h3>
+      <h3 class="text-2xl font-bold">{{post.fields.galleryOneTitle}}</h3>
       <p class="gallery-lead" v-html="post.fields.galleryOneText">{{post.fields.galleryOneText}}</p>
 
       <template v-for="(image, index) in post.fields.galleryOne">
@@ -87,8 +87,8 @@
 
     <!-- Gallery 2 -->
     <div class="grid-gallery">
-      <h3 class="">{{post.fields.galleryTwoTitle}}</h3>
-      <p class="gallery-lead lead" v-html="post.fields.galleryTwoText">{{post.fields.galleryTwoText}}</p>
+      <h3 class="text-2xl font-bold">{{post.fields.galleryTwoTitle}}</h3>
+      <p class="gallery-lead" v-html="post.fields.galleryTwoText">{{post.fields.galleryTwoText}}</p>
       
       <template v-for="(image, index) in post.fields.galleryTwo">
         <!-- I used template here to be able to add dynamically class fullWidth ot images that are on 100% of the grid -->
@@ -105,7 +105,7 @@
             <!-- Modal shows-->
             <transition name="fade">
               <div class="modal" v-if="showModal & currentPic == image.fields.file.fileName" @close="showModal = false">
-                <h3 slot="header">Modal shows</h3>
+                <h3 slot="header">{{image.fields.description}}</h3>
                 <img :src="image.fields.file.url" alt="">
               </div>
             </transition>
@@ -117,7 +117,7 @@
           <!-- Modal shows -->
           <transition name="fade">
             <div class="modal" v-if="showModal & currentPic == image.fields.file.fileName" @close="showModal = false">
-              <h3 slot="header">Modal shows</h3>
+              <h3 slot="header">{{image.fields.description}}</h3>
               <img :src="image.fields.file.url" alt="">
             </div>
           </transition>
@@ -125,21 +125,27 @@
       </template>
     </div>
 
+    
+
     <!-- next / previosus section -->
     <div class="nav-bottom">
-      <div>
+      <div class="nav-item">
         <nuxt-link class="group nav-bottom-link text-mono" v-if="currentPostIndex() > 0" :to="allPortfolios[currentPostIndex() - 1].fields.slug">
-        <ArrowLeft />
-        <span class="self-center">
-          {{allPortfolios[currentPostIndex() - 1].fields.title}}
-        </span>
+          <span class="nav-arrow"><ArrowLeft /></span>
+          <div class="">
+            <p class="text-center transition-all ease-out duration-500">Previous | <span class="font-bold">{{allPortfolios[currentPostIndex() - 1].fields.title}}</span></p>
+            <img class="h-32 w-auto p-0 mt-2 rounded-lg transition-all ease-out duration-500" :src="allPortfolios[currentPostIndex() - 1].fields.heroImage.fields.file.url" alt="">
+          </div>
         </nuxt-link>
       </div>
         <button class="mr-2 px-4 py-2 border rounded-full text-xs self-center group nav-bottom-link text-mono transition-colors hover:border-blue-500" @click="scrollToTop()">Back to top</button>
-      <div>
+      <div class="nav-item">
         <nuxt-link class="group nav-bottom-link text-mono" v-if="currentPostIndex() < this.$store.state.portfolios.length-1" :to="allPortfolios[currentPostIndex() + 1].fields.slug">
-          <span class="self-center">{{allPortfolios[currentPostIndex() + 1].fields.title}}</span>
-          <ArrowRight />
+          <div class="">
+            <p class="text-center transition-all ease-out duration-500">Next | <span class="font-bold">{{allPortfolios[currentPostIndex() + 1].fields.title}}</span></p>
+            <img class="h-32 w-auto p-0 mt-2 rounded-lg transition-all ease-out duration-500" :src="allPortfolios[currentPostIndex() + 1].fields.heroImage.fields.file.url" alt="">
+          </div>
+          <span class="nav-arrow"><ArrowRight /></span>
         </nuxt-link>
       </div>
     </div>
@@ -233,16 +239,25 @@ export default {
     margin: 0 auto;
   }
   .lead {
-    @apply self-center mt-6
+    @apply self-center lg:mt-0 mt-6
   }
   .link-back {
     @apply m-auto max-w-2xl lg:max-w-7xl px-6 block
   }
   .nav-bottom {
-    @apply flex justify-between m-auto max-w-2xl px-6 lg:max-w-7xl 
+    @apply flex justify-between m-auto max-w-2xl px-6 lg:max-w-7xl pt-4
+  }
+  .nav-arrow {
+    @apply self-center
   }
   .nav-bottom-link {
-    @apply flex flex-row align-middle text-xs
+    @apply flex text-xs
+  }
+  .nav-bottom-link:hover p {
+    transform: translateY(-0.1rem);
+  }
+  .nav-bottom-link:hover img {
+    transform: translateY(0.3rem);
   }
   .nav-bottom-icon {
     @apply self-center

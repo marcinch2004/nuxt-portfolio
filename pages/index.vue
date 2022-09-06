@@ -18,9 +18,9 @@
             v-if="currentFilter === portfolio.metadata.tags[0].sys.id || currentFilter === 'All'"
             :class="portfolio.metadata.tags[0].sys.id" class="portfolio-link group block" :to="`/${ portfolio.fields.slug }`">
              <!-- <p>tag: {{ portfolio.metadata.tags[0].sys.id }}</p> -->
-              <h3 class="transition-all ease-out duration-500">{{ portfolio.fields.title }}</h3>
-              <p class="portfolio_description text-gray-600 transition-all ease-out duration-500 text-sm text-mono">{{portfolio.fields.description}}</p>
-              <img class="portfolio_img transition-all ease-out duration-500 pt-2" :src="portfolio.fields.heroImage.fields.file.url" alt="">
+              <h3 class="text-2xl font-bold mb-2 mt-0 transition-all ease-out duration-500">{{ portfolio.fields.title }}</h3>
+              <p class="mt-0 portfolio_description text-gray-600 transition-all ease-out duration-500 text-sm text-mono">{{portfolio.fields.description}}</p>
+              <img class="p-0 mt-2 rounded-2xl portfolio_img transition-all ease-out duration-500" :src="portfolio.fields.heroImage.fields.file.url" alt="">
             </nuxt-link>
           </div>
       </div>
@@ -71,9 +71,6 @@
   h2 {
     @apply text-5xl font-bold py-6
   }
-  h3 {
-    @apply text-2xl font-bold mb-2
-  }
   .lead {
     @apply text-2xl
   }
@@ -95,5 +92,7 @@
   .portfolio_item {
     @apply contents;
   }
-
+  img {
+    @apply pt-2
+  }
 </style>

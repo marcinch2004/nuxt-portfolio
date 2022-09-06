@@ -10,7 +10,7 @@
               </div>
               <div class="max-w-prose">
                 <p class="text-sm text-gray-500 mt-0">{{post.sys.updatedAt.split("T")[0].split('-').reverse().join('.')}}</p>
-                <h3 class="my-4">{{ post.fields.title }}</h3>
+                <h3 class="text-xl font-bold my-4">{{ post.fields.title }}</h3>
                 <p class="description">{{post.fields.description}}</p>
               </div>
             </nuxt-link>
