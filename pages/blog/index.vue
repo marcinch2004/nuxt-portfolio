@@ -33,9 +33,9 @@
 
 // all styles go here
 <style lang="postcss">
-  h2 {
+  /* h2 {
     @apply text-5xl font-bold pt-0
-  }
+  } */
   .image {
     min-width: 20rem;
   }

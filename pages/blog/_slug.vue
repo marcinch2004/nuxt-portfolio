@@ -1,11 +1,11 @@
 <template>
-  <section class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 ">
-    <div class="flex content-start flex-col lg:flex-row">
+  <section class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-screen-lg lg:px-8 ">
+    <div class="flex flex-col content-start">
 
       <!-- <p>{{allPosts}}</p> -->
       <nuxt-link class="self-start mr-12 px-4 py-2 mb-8 border rounded-full text-xs group nav-bottom-link text-mono transition-colors hover:border-blue-500" to="/blog">Back to blog</nuxt-link>
 
-      <div class="max-w-prose">
+      <div class="max-w-2xl">
         <h2 class="">{{post.fields.title}}</h2>
         <div v-html="markdownToHtml"></div>
       </div>
@@ -69,9 +69,15 @@ export default {
 }
 </script>
 
+<style lang="postcss" scoped>
+  h2 {
+    padding-bottom: 0
+  }
+</style>
+
 <style lang="postcss">
   h3 {
-    @apply mt-12
+    @apply mt-12 text-2xl font-bold
   }
   img {
     @apply mt-8 mb-4
