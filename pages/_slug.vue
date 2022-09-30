@@ -1,5 +1,5 @@
 <template>
-  <section ref="testBlock" class="container-fluid mx-auto py-12 sm:py-12">
+  <section ref="testBlock" class="container-fluid mx-auto py-8 sm:py-12">
     <nuxt-link to="/" class="link-back">
       <ArrowLeft />
     </nuxt-link>
@@ -129,23 +129,23 @@
 
     <!-- next / previosus section -->
     <div class="nav-bottom">
-      <div class="nav-item">
+      <div class="nav-item self-center mt-8 sm:mt-0">
         <nuxt-link class="group nav-bottom-link text-mono" v-if="currentPostIndex() > 0" :to="allPortfolios[currentPostIndex() - 1].fields.slug">
-          <span class="nav-arrow"><ArrowLeft /></span>
+          <span class="nav-arrow hidden sm:block"><ArrowLeft /></span>
           <div class="">
             <p class="text-center transition-all ease-out duration-500">Previous | <span class="font-bold">{{allPortfolios[currentPostIndex() - 1].fields.title}}</span></p>
-            <img class="h-32 w-auto p-0 mt-2 rounded-lg transition-all ease-out duration-500" :src="allPortfolios[currentPostIndex() - 1].fields.heroImage.fields.file.url" alt="">
+            <img class="h-auto max-h-28 w-auto p-0 mt-2 rounded-lg transition-all ease-out duration-500" :src="allPortfolios[currentPostIndex() - 1].fields.heroImage.fields.file.url" alt="">
           </div>
         </nuxt-link>
       </div>
-        <button class="mr-2 px-4 py-2 border rounded-full text-xs self-center group nav-bottom-link text-mono transition-colors hover:border-blue-500" @click="scrollToTop()">Back to top</button>
-      <div class="nav-item">
-        <nuxt-link class="group nav-bottom-link text-mono" v-if="currentPostIndex() < this.$store.state.portfolios.length-1" :to="allPortfolios[currentPostIndex() + 1].fields.slug">
+        <button class="order-first sm:order-none mr-2 px-4 py-2 border rounded-full text-xs self-center group nav-bottom-link text-mono transition-colors hover:border-blue-500" @click="scrollToTop()">Back to top</button>
+      <div class="nav-item self-center mt-8 sm:mt-0">
+        <nuxt-link class="group nav-bottom-link text-mono " v-if="currentPostIndex() < this.$store.state.portfolios.length-1" :to="allPortfolios[currentPostIndex() + 1].fields.slug">
           <div class="">
             <p class="text-center transition-all ease-out duration-500">Next | <span class="font-bold">{{allPortfolios[currentPostIndex() + 1].fields.title}}</span></p>
-            <img class="h-32 w-auto p-0 mt-2 rounded-lg transition-all ease-out duration-500" :src="allPortfolios[currentPostIndex() + 1].fields.heroImage.fields.file.url" alt="">
+            <img class="h-auto max-h-28 w-auto p-0 mt-2 rounded-lg transition-all ease-out duration-500" :src="allPortfolios[currentPostIndex() + 1].fields.heroImage.fields.file.url" alt="">
           </div>
-          <span class="nav-arrow"><ArrowRight /></span>
+          <span class="nav-arrow hidden sm:block"><ArrowRight /></span>
         </nuxt-link>
       </div>
     </div>
@@ -209,10 +209,10 @@ export default {
 
 <style lang="postcss" scoped>
   .grid-gallery {
-    @apply m-auto max-w-2xl px-6  lg:max-w-7xl lg:grid lg:grid-cols-2 gap-x-8 gap-y-12 my-36 md:block
+    @apply m-auto max-w-2xl px-6 lg:max-w-7xl lg:grid lg:grid-cols-2 gap-x-8 gap-y-12 sm:my-36 my-20 md:block
   }
   .first-gallery {
-    @apply mt-24 mb-12
+    @apply sm:mt-24 mt-8 mb-12
   }
   .gallery-lead {
     @apply text-lg lg:mb-0 mb-8
@@ -245,13 +245,17 @@ export default {
     @apply m-auto max-w-2xl lg:max-w-7xl px-6 block
   }
   .nav-bottom {
-    @apply flex justify-between m-auto max-w-2xl px-6 lg:max-w-7xl pt-4
+    @apply flex sm:flex-row flex-col justify-between m-auto max-w-2xl px-6 lg:max-w-7xl pt-4
   }
   .nav-arrow {
     @apply self-center
   }
   .nav-bottom-link {
     @apply flex text-xs
+  }
+  .nav-item {
+    /* border: 1px solid; */
+    min-width: 10rem;
   }
   .nav-bottom-link:hover p {
     transform: translateY(-0.1rem);
