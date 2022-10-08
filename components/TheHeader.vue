@@ -7,10 +7,15 @@
           <span class="self-center font-bold text-xs">Marcin Chełminiak</span>
         </nuxt-link>
         <button class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block sm:hidden outline-none focus:outline-none" type="button" v-on:click="toggleNavbar()">
-          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" class="svg-inline--fa fa-bars fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg>
+          <div id="nav-hamburger" v-bind:class="{'open' : showMenu === true}">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </button>
       </div>
-      <div v-bind:class="{'hidden': !showMenu, 'flex': showMenu}" class="sm:flex sm:flex-grow items-center">
+      <div v-bind:class="{'nav-hidden': !showMenu, 'nav-open': showMenu}" v-on:click="toggleNavbar()" class="sm:flex sm:flex-grow items-center sm:transition-opacity">
         <ul class="flex flex-col sm:flex-row list-none ml-auto my-0">
           <li class="nav-item">
             <nuxt-link to="/blog" class="menu-item">
@@ -57,5 +62,79 @@ export default {
 
 svg {
   width: 1.3rem;
+}
+
+/* Icon 3 */
+#nav-hamburger {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  /* margin: 50px auto; */
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+  cursor: pointer;
+}
+
+#nav-hamburger span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: #000000;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: .25s ease-in-out;
+  -moz-transition: .25s ease-in-out;
+  -o-transition: .25s ease-in-out;
+  transition: .25s ease-in-out;
+}
+#nav-hamburger span:nth-child(1) {
+  top: 0px;
+}
+#nav-hamburger span:nth-child(2),#nav-hamburger span:nth-child(3) {
+  top: 8px;
+}
+#nav-hamburger span:nth-child(4) {
+  top: 16px;
+}
+#nav-hamburger.open span:nth-child(1) {
+  top: 8px;
+  width: 0%;
+  left: 50%;
+}
+#nav-hamburger.open span:nth-child(2) {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+#nav-hamburger.open span:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+#nav-hamburger.open span:nth-child(4) {
+  top: 8px;
+  width: 0%;
+  left: 50%;
+}
+
+.nav-hidden {
+  display: none;
+}
+.nav-open {
+  display: flex;
 }
 </style>

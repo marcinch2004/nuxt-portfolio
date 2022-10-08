@@ -56,7 +56,8 @@ export default {
   plugins: [
     "~/plugins/contentful", 
     "~/plugins/posts",
-    "~/plugins/portfolios"
+    "~/plugins/portfolios",
+    // "~/plugins/postlists"
   ],
 
   /*

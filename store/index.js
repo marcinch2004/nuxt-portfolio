@@ -1,4 +1,5 @@
 import client from "~/plugins/contentful";
+// import postlist from "../plugins/postlists";
 
 export const state = () => ({
   posts: null,
