@@ -83,10 +83,10 @@ export default {
     @apply mt-8 mb-4
   }
   p {
-    @apply text-lg mt-6 leading-relaxed
+    @apply text-lg mt-6 leading-relaxed;
   }
   figcaption {
-    @apply mb-10 text-blue-500 text-xs
+    @apply mb-10 text-blue-500 text-xs;
   }
   ul {
     @apply text-lg my-4 list-disc pl-4;
@@ -94,6 +94,13 @@ export default {
   p > img {
     /* border: 1px solid red; */
   }
+
+  blockquote > p {
+    font-style: italic;
+    padding: 0 2rem;
+    color: rgba(55, 65, 81);
+  }
+  
   .nav-bottom {
     @apply flex justify-between m-auto max-w-2xl px-6 lg:max-w-7xl mt-10
   }

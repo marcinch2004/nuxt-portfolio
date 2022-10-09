@@ -15,7 +15,7 @@
           </div>
         </button>
       </div>
-      <div v-bind:class="{'nav-hidden': !showMenu, 'nav-open': showMenu}" v-on:click="toggleNavbar()" class="sm:flex sm:flex-grow items-center sm:transition-opacity">
+      <div v-bind:class="{'hidden': !showMenu, 'flex': showMenu}" v-on:click="toggleNavbar()" class="sm:flex sm:flex-grow items-center sm:transition-opacity">
         <ul class="flex flex-col sm:flex-row list-none ml-auto my-0">
           <li class="nav-item">
             <nuxt-link to="/blog" class="menu-item">
@@ -129,12 +129,5 @@ svg {
   top: 8px;
   width: 0%;
   left: 50%;
-}
-
-.nav-hidden {
-  display: none;
-}
-.nav-open {
-  display: flex;
 }
 </style>
